@@ -1,5 +1,5 @@
 from math import sqrt
-from data import critics
+from data_files.data import critics
 
 def sim_distance(preferences, person1, person2):
     """

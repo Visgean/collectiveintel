@@ -1,7 +1,7 @@
 import csv
 from tabulate import tabulate
 
-from data import critics
+from data_files.data import critics
 
 class Table:
     output_file = ''
@@ -21,7 +21,7 @@ class Table:
         pass
 
     def save_file(self):
-        with open(self.output_file, 'w') as fp:
+        with open('data_files/' + self.output_file, 'w') as fp:
             a = csv.writer(fp, delimiter=self.delimiter)
             a.writerows(self.output_data)
 
@@ -49,3 +49,4 @@ class BasicTable(Table):
 
 b = BasicTable()
 print b.tabulate()
+
