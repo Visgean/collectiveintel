@@ -26,7 +26,7 @@ class Table:
             a.writerows(self.output_data)
 
     def tabulate(self):
-        return tabulate(self.output_data[1:], self.output_data[0])
+        return tabulate(self.output_data[1:], self.output_data[0], tablefmt="grid")
 
 
 
