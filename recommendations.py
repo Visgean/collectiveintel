@@ -4,6 +4,9 @@ from data_files.data import critics
 def sim_distance(preferences, person1, person2):
     """
         Returns Euclidean distance score
+
+        r(\vec{x},\vec{y})=\frac {1}{1+(x_1 - y_1)^2 +...+(x_n - y_n)^2}
+
     """
     # list with th elements (eg movies) that both persons have in common
     common_list = set(preferences[person1].keys()) & set(preferences[person2].keys())
@@ -17,6 +20,9 @@ def sim_distance(preferences, person1, person2):
 def sim_pearson(preferences, person1, person2):
     """
         Returns Pearson correlation score
+
+        r(x,y) = \frac { (\sum_{i \mathop =1}^n x_iy_i) - \frac {(\sum_{i \mathop =1}^n x_i) (\sum_{i \mathop =1}^n y_i)}{n}} {\sqrt ((\sum_{i \mathop =1}^n x_i^2)- (\frac {\sum_{i \mathop =1}^n x_i)^2}{n}))*((\sum_{i \mathop =1}^n y_i^2)- (\frac {\sum_{i \mathop =1}^n y_i)^2}{n}))}
+
     """
 
     # list with the elements (eg movies) that both persons have in common
