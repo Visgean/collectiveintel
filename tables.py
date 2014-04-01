@@ -22,8 +22,8 @@ class Table:
     def set_lines(self):
         pass
 
-    def save_file(self):
-        with open('data_files/' + self.output_file, 'w') as fp:
+    def save_file(self, output_file):
+        with open('data_files/' + output_file, 'w') as fp:
             a = csv.writer(fp, delimiter=self.delimiter)
             a.writerows(self.output_data)
 
@@ -33,7 +33,6 @@ class Table:
 
 
 class BasicTable(Table):
-    output_file = 'basic.csv'
     def get_horizontal_labels(self):
         movies = set()  # set of all the movies that we have data based on
         for critic in critics.keys():
@@ -49,7 +48,6 @@ class BasicTable(Table):
 
 
 class SimilarityTable(Table):
-    output_file = 'SimilarityEuclid.csv'
     def get_horizontal_labels(self):
         return critics.keys()
 
@@ -61,8 +59,6 @@ class SimilarityTable(Table):
             self.output_data.append(user_data)
 
 class SimilarityPearson(SimilarityTable):
-    output_file = 'SimilarityPearson.csv'
-
     def set_lines(self):
         for critic in critics:
             user_data = [critic]
