@@ -3,7 +3,7 @@ import csv
 from tabulate import tabulate
 
 from data_files.data import critics
-from recommendations import sim_distance, sim_pearson, top_matches
+from recommendations import sim_distance, sim_pearson, top_matches, transform_preferences
 
 
 class Table(object):
@@ -34,7 +34,7 @@ class Table(object):
 
 
 class BasicTable(Table):
-    def get_horizontal_labels(self):
+    def get_horizontal_labels(self, ):
         movies = set()  # set of all the movies that we have data based on
         for critic in critics.keys():
             movies = movies | set(critics[critic].keys())
@@ -130,5 +130,8 @@ class RecommendTable(Table):
 # print SimilarityTable().tabulate()
 # print 'Pearson:'
 # print SimilarityPearson().tabulate()
-print RecommendTable('Eva', similarity_alg=sim_distance).tabulate()
-print RecommendTable('Eva').tabulate()
+# print RecommendTable('Eva', similarity_alg=sim_distance).tabulate()
+# print RecommendTable('Eva').tabulate()
+
+
+critics = transform_preferences(critics)

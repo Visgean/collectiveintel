@@ -75,6 +75,13 @@ def recommend(preferences, person):
     movies_to_see = movies - set(preferences[person].keys()) # set of all the movies that 'person' did not see yet
 
 
-
+def transform_preferences(preferences):
+    result={}
+    for person in preferences:
+        for item in preferences[person]:
+            result.setdefault(item,{})
+            #Flip item and person
+            result[item][person]=preferences[person][item]
+    return result
 
 #print recommend(preferences=critics, person='Toby')
