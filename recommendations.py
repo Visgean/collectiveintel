@@ -23,6 +23,10 @@ def sim_pearson(preferences, person1, person2):
 
         r(x,y) = \frac { (\sum_{i \mathop =1}^n x_iy_i) - \frac {(\sum_{i \mathop =1}^n x_i) (\sum_{i \mathop =1}^n y_i)}{n}} {\sqrt ((\sum_{i \mathop =1}^n x_i^2)- (\frac {\sum_{i \mathop =1}^n x_i)^2}{n}))*((\sum_{i \mathop =1}^n y_i^2)- (\frac {\sum_{i \mathop =1}^n y_i)^2}{n}))}
 
+        r = \frac{\sum ^n _{i=1}(X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\sum ^n _{i=1}(X_i - \bar{X})^2} \sqrt{\sum ^n _{i=1}(Y_i - \bar{Y})^2}}
+
+        http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#For_a_sample
+
     """
 
     # list with the elements (eg movies) that both persons have in common
@@ -49,15 +53,16 @@ def sim_pearson(preferences, person1, person2):
     else:
         return 0
 
-def top_matches(preferences, person, number_of_elements = 3, similarity = sim_pearson):
+def top_matches(preferences, person, number_of_elements = None, similarity = sim_pearson):
     others = list(critics.keys()) # creating another instance of critics keys
     others.remove(person)
 
     scores = [(similarity(preferences, person, other),other) for other in  others]
     scores.sort(reverse=True)
-    return scores[:number_of_elements]
 
-
+    if number_of_elements:
+        return scores[:number_of_elements]
+    return scores
 
 
 def recommend(preferences, person):
