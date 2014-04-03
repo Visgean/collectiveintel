@@ -69,8 +69,9 @@ class SimilarityPearson(SimilarityTable):
 
 
 class RecommendTable(Table):
-    def __init__(self, target):
+    def __init__(self, target, similarity_alg = sim_pearson):
         self.target = target
+        self.similarity_alg = similarity_alg
         super(RecommendTable, self).__init__()
 
     def get_horizontal_labels(self):
@@ -97,7 +98,7 @@ class RecommendTable(Table):
         n_rankings = Counter()
 
         for critic in others:
-            similarity = sim_pearson(critics, self.target, critic)
+            similarity = self.similarity_alg(critics, self.target, critic)
             sum_rankings['__similarity__'] += similarity
 
             user_data = [critic, similarity]
@@ -129,4 +130,5 @@ class RecommendTable(Table):
 # print SimilarityTable().tabulate()
 # print 'Pearson:'
 # print SimilarityPearson().tabulate()
-print RecommendTable('Filip').tabulate()
+print RecommendTable('Eva', similarity_alg=sim_distance).tabulate()
+print RecommendTable('Eva').tabulate()
