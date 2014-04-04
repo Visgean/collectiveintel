@@ -1,5 +1,4 @@
 from math import sqrt
-from data_files.data import critics
 
 def sim_distance(preferences, person1, person2):
     """
@@ -54,7 +53,7 @@ def sim_pearson(preferences, person1, person2):
         return 0
 
 def top_matches(preferences, person, number_of_elements = None, similarity = sim_pearson):
-    others = list(critics.keys()) # creating another instance of critics keys
+    others = list(preferences.keys()) # creating another instance of critics keys
     others.remove(person)
 
     scores = [(similarity(preferences, person, other),other) for other in  others]
